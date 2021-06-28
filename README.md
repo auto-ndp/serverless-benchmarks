@@ -289,3 +289,10 @@ Implement the interfaces in `sebs/faas/*.py`, and add the new platform to the CL
 ### How to add a new experiment?
 
 Implement the interface in `sebs/experiment/experiment.py` and new experiment type to the CLI initialization in `sebs.py` and `sebs/sebs.py`.
+
+
+## Running PIN instrumentation for faasm-ndp
+
+Install the virtual environment as in the above installation instructions, the requirements.txt package listing has been expanded with all the benchmark dependencies to make running them under instrumentation easier.
+
+

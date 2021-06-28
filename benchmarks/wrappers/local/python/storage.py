@@ -1,8 +1,16 @@
 import io
 import os
+import sys
 import uuid
 
 import minio
+
+try:
+    from pinnearmap import pinnearmap_phase
+except ImportError:
+    # Do nothing when not running under the instrumentation tool
+    def pinnearmap_phase(name):
+        pass
 
 class storage:
     instance = None
@@ -18,6 +26,10 @@ class storage:
                     access_key=access_key,
                     secret_key=secret_key,
                     secure=False)
+
+    @staticmethod
+    def ndp_phase(phase_name):
+        pinnearmap_phase(phase_name)
 
     @staticmethod
     def unique_name(name):
