@@ -5,7 +5,7 @@ import uuid
 
 import urllib.request
 
-from . import storage
+import storage
 client = storage.storage.get_instance()
 
 

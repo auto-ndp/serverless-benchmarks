@@ -27,7 +27,7 @@ def main(req: func.HttpRequest, context: func.Context) -> func.HttpResponse:
     if 'logs' in req_json:
         log_data['time'] = (end - begin) / datetime.timedelta(microseconds=1)
         results_begin = datetime.datetime.now()
-        from . import storage
+        import storage
         storage_inst = storage.storage.get_instance()
         b = req_json.get('logs').get('bucket')
         req_id = context.invocation_id

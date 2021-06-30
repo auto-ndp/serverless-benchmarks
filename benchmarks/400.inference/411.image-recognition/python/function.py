@@ -6,7 +6,7 @@ import torch
 from torchvision import transforms
 from torchvision.models import resnet50
 
-from . import storage
+import storage
 client = storage.storage.get_instance()
 
 SCRIPT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__)))

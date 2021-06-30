@@ -2,7 +2,7 @@ import datetime, io, json
 # using https://squiggle.readthedocs.io/en/latest/
 from squiggle import transform
 
-from . import storage
+import storage
 client = storage.storage.get_instance()
 
 def handler(event):
