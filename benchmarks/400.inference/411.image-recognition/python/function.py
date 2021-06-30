@@ -10,7 +10,9 @@ import storage
 client = storage.storage.get_instance()
 
 SCRIPT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+storage.ndp_phase('input-json-read')
 class_idx = json.load(open(os.path.join(SCRIPT_DIR, "imagenet_class_index.json"), 'r'))
+storage.ndp_phase('input-json-read-done')
 idx2label = [class_idx[str(k)][1] for k in range(len(class_idx))]
 model = None
 
@@ -36,7 +38,9 @@ def handler(event):
         model_download_end = datetime.datetime.now()
         model_process_begin = datetime.datetime.now()
         model = resnet50(pretrained=False)
+        storage.ndp_phase('input-model-read')
         model.load_state_dict(torch.load(model_path))
+        storage.ndp_phase('input-model-read-done')
         model.eval()
         model_process_end = datetime.datetime.now()
     else:

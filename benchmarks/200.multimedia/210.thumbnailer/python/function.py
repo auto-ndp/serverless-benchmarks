@@ -19,6 +19,7 @@ client = storage.storage.get_instance()
 def resize_image(image_bytes, w, h):
     with Image.open(io.BytesIO(image_bytes)) as image:
         image.thumbnail((w,h))
+        storage.ndp_phase('input-read-done')
         out = io.BytesIO()
         image.save(out, format='jpeg')
         # necessary to rewind to the beginning of the buffer
@@ -39,6 +40,7 @@ def handler(event):
     #resize_image(download_path, upload_path, width, height)
     #client.upload(output_bucket, key, upload_path)
     download_begin = datetime.datetime.now()
+    storage.ndp_phase('input-read')
     img = client.download_stream(input_bucket, key)
     download_end = datetime.datetime.now()
 
