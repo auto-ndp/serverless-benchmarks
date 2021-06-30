@@ -15,13 +15,13 @@ def handler(event):
     download_begin = datetime.datetime.now()
     client.download(input_bucket, key, download_path)
     download_stop = datetime.datetime.now()
-    storage.ndp_phase('input-read')
+    storage.storage.ndp_phase('input-read')
     data = open(download_path, "r").read()
 
     process_begin = datetime.datetime.now()
     result = transform(data)
     process_end = datetime.datetime.now()
-    storage.ndp_phase('input-read-done')
+    storage.storage.ndp_phase('input-read-done')
 
     upload_begin = datetime.datetime.now()
     buf = io.BytesIO(json.dumps(result).encode())

@@ -77,7 +77,8 @@ for func in $FUNCTIONS; do
     rresf=${RESULT_PATH}/${fname}_${size}.log
     echo > ${rresf} # erase old results
     echo "= Saving results to '$rresf'"
-    "${PIN_EXE}" -t "${NEARMAP_SO}" -o "${rresf}" -- python ./pinruntool.py --py-file "$func" --size "$size" </dev/null >${rresf}.stdout 2>${rresf}.stderr || (echo "Failed with error code $?" ; exit 1)
+    #"${PIN_EXE}" -t "${NEARMAP_SO}" -o "${rresf}" -- 
+    python ./pinruntool.py --py-file "$func" --size "$size" </dev/null >${rresf}.stdout 2>${rresf}.stderr || (echo "$fname::$size failed with error code $?" ; exit 1) &
   done
 done
 wait

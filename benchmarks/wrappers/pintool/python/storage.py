@@ -22,21 +22,12 @@ class storage:
     def ndp_phase(phase_name):
         pinnearmap_phase(phase_name)
 
-    @staticmethod
-    def unique_name(name):
-        name, extension = name.split('.')
-        return '{name}.{random}.{extension}'.format(
-                    name=name,
-                    extension=extension,
-                    random=str(uuid.uuid4()).split('-')[0]
-                )
-
     def ensure_bucket(self, bucket):
         if bucket not in self.buckets:
             self.buckets[bucket] = dict()
 
     def upload(self, bucket, file, filepath):
-        key_name = storage.unique_name(file)
+        key_name = file
         self.ensure_bucket(bucket)
         self.buckets[bucket][key_name] = filepath
         return key_name
@@ -51,14 +42,14 @@ class storage:
             shutil.copyfile(stored_file, os.path.join(path, object_name))
 
     def upload_stream(self, bucket, file, bytes_data):
-        key_name = storage.unique_name(file)
+        key_name = file
         # no-op write
         return key_name
 
     def download_stream(self, bucket, file):
         data = b''
         filepath = self.buckets[bucket][file]
-        with io.open(filepath, 'r') as fp:
+        with io.open(filepath, 'rb') as fp:
             data = fp.read()
         return data
 
