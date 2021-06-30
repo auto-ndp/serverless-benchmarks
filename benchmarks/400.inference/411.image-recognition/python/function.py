@@ -9,6 +9,7 @@ from torchvision.models import resnet50
 import storage
 client = storage.storage.get_instance()
 
+torch.set_num_threads(1)
 SCRIPT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 storage.storage.ndp_phase('input-json-read')
 class_idx = json.load(open(os.path.join(SCRIPT_DIR, "imagenet_class_index.json"), 'r'))

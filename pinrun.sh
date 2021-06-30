@@ -67,6 +67,9 @@ done
 
 echo '===========' Running benchmarks
 
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+
 for func in $FUNCTIONS; do
   fname=$(echo $func | grep -P -o '[0-9](?!00)[0-9][0-9]\.[a-zA-Z-]+')
   echo $fname
